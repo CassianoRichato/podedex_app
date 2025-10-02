@@ -11,9 +11,7 @@ class FavoritesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Favoritos"),
-      ),
+      appBar: AppBar(title: const Text("Favoritos")),
       body: BlocBuilder<FavoritesController, FavoritesState>(
         builder: (context, state) {
           if (state is FavoritesLoading) {
