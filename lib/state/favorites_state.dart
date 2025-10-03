@@ -1,4 +1,4 @@
-import 'package:aula_arquitetura/module/dashboard/core/domain/model/pokemon.dart';
+import 'package:pokedex_app/module/pokedex/domain/model/pokemon.dart';
 
 abstract class FavoritesState {}
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:aula_arquitetura/module/dashboard/core/domain/model/pokemon.dart';
-import 'package:aula_arquitetura/module/favorites/controller/favorites_controller.dart';
+import 'package:pokedex_app/module/pokedex/controller/favorites_controller.dart';
+import 'package:pokedex_app/module/pokedex/domain/model/pokemon.dart';
 
 class PokemonDetailView extends StatelessWidget {
   final Pokemon pokemon;
@@ -19,9 +19,7 @@ class PokemonDetailView extends StatelessWidget {
               final controller = context.read<FavoritesController>();
               final isFav = controller.isFavorite(pokemon);
               return IconButton(
-                icon: Icon(
-                  isFav ? Icons.favorite : Icons.favorite_border,
-                ),
+                icon: Icon(isFav ? Icons.favorite : Icons.favorite_border),
                 onPressed: () {
                   controller.toggleFavorite(pokemon);
                 },
@@ -50,7 +48,7 @@ class PokemonDetailView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text("ID: ${pokemon.id}"),
-            Text("Tipo: ${pokemon.type}"),
+            Text("Tipo: ${pokemon.runtimeType}"),
           ],
         ),
       ),

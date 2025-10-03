@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:aula_arquitetura/module/favorites/controller/favorites_controller.dart';
-import 'package:aula_arquitetura/module/favorites/state/favorites_state.dart';
-import 'package:aula_arquitetura/module/dashboard/core/domain/model/pokemon.dart';
-import 'package:aula_arquitetura/module/pokemon_detail/view/pokemon_detail_view.dart';
+import 'package:pokedex_app/module/pokedex/controller/favorites_controller.dart';
+import 'package:pokedex_app/state/favorites_state.dart';
+import 'package:pokedex_app/view/pokemon_detail_view.dart';
 
 class FavoritesView extends StatelessWidget {
   const FavoritesView({super.key});
@@ -11,9 +10,7 @@ class FavoritesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Favoritos"),
-      ),
+      appBar: AppBar(title: const Text("Favoritos")),
       body: BlocBuilder<FavoritesController, FavoritesState>(
         builder: (context, state) {
           if (state is FavoritesLoading) {

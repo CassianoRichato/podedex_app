@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import '../core/domain/model/pokemon.dart';
-import '../core/domain/usecase/fetch_pokemons_usecase.dart';
-import '../core/domain/usecase/toggle_favorite_usecase.dart';
-import '../state/pokedex_state.dart';
+import 'package:pokedex_app/module/pokedex/domain/model/pokemon.dart';
+import 'package:pokedex_app/module/pokedex/domain/usecase/fetch_pokemons_usecase.dart';
+import 'package:pokedex_app/module/pokedex/domain/usecase/toggle_favorite_usecase.dart';
+import 'package:pokedex_app/state/pokedex_state.dart';
 
 @injectable
 class PokedexController extends Cubit<PokedexState> {
@@ -13,14 +13,15 @@ class PokedexController extends Cubit<PokedexState> {
   PokedexController({
     required this.fetchPokemonsUsecase,
     required this.toggleFavoriteUsecase,
-  }) : super(PokedexInitial());
+  }) : super(PokedexInitial()) {
+    loadPokemons();
+  }
 
   Future<void> loadPokemons({int limit = 50, int offset = 0}) async {
     emit(PokedexLoading());
     try {
-      final pokemons =
-          await fetchPokemonsUsecase(limit: limit, offset: offset);
-      emit(PokedexLoaded(pokemons: pokemons));
+      final pokemons = await fetchPokemonsUsecase(limit: limit, offset: offset);
+      emit(PokedexLoaded(pokemons: List.from(pokemons)));
     } catch (e) {
       emit(PokedexError(message: e.toString()));
     }
@@ -28,8 +29,14 @@ class PokedexController extends Cubit<PokedexState> {
 
   Future<void> toggleFavorite(Pokemon pokemon) async {
     await toggleFavoriteUsecase(pokemon);
+
     if (state is PokedexLoaded) {
-      emit(PokedexLoaded(pokemons: List.from((state as PokedexLoaded).pokemons)));
+      final current = state as PokedexLoaded;
+      final updatedList = current.pokemons.map((p) {
+        if (p.id == pokemon.id) return pokemon;
+        return p;
+      }).toList();
+      emit(PokedexLoaded(pokemons: updatedList));
     }
   }
 }

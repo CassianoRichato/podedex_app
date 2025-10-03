@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../controller/pokedex_controller.dart';
+import 'package:pokedex_app/module/pokedex/controller/pokedex_controller.dart';
 import '../../state/pokedex_state.dart';
-import '../../core/domain/model/pokemon.dart';
 import 'pokemon_detail_view.dart';
 
 class PokedexView extends StatelessWidget {
@@ -33,8 +32,7 @@ class PokedexView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) =>
-                            PokemonDetailView(pokemon: pokemon),
+                        builder: (_) => PokemonDetailView(pokemon: pokemon),
                       ),
                     );
                   },
@@ -52,9 +50,9 @@ class PokedexView extends StatelessWidget {
                             color: pokemon.isFavorite ? Colors.red : null,
                           ),
                           onPressed: () {
-                            context
-                                .read<PokedexController>()
-                                .toggleFavorite(pokemon);
+                            context.read<PokedexController>().toggleFavorite(
+                              pokemon,
+                            );
                           },
                         ),
                       ],
@@ -70,8 +68,10 @@ class PokedexView extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            context.read<PokedexController>().loadPokemons(limit: 30, offset: 0),
+        onPressed: () => context.read<PokedexController>().loadPokemons(
+          limit: 30,
+          offset: 0,
+        ),
         child: const Icon(Icons.refresh),
       ),
     );

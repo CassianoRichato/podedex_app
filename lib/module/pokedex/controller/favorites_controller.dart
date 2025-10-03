@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:aula_arquitetura/module/favorites/state/favorites_state.dart';
-import 'package:aula_arquitetura/module/dashboard/core/domain/model/pokemon.dart';
+import 'package:pokedex_app/module/pokedex/domain/model/pokemon.dart';
+import 'package:pokedex_app/state/favorites_state.dart';
 
 @injectable
 class FavoritesController extends Cubit<FavoritesState> {

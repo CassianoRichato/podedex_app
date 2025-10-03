@@ -1,4 +1,4 @@
-import '../core/domain/model/pokemon.dart';
+import 'package:pokedex_app/module/pokedex/domain/model/pokemon.dart';
 
 abstract class PokedexState {}
 
